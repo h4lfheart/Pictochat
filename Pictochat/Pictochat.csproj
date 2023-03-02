@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <ApplicationIcon>Pictochat.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Resource Include="Resources/HealthAndSafety.png" />
+        <None Remove="Resources\Nintendo-DS-BIOS.ttf" />
+        <Resource Include="Resources\Nintendo-DS-BIOS.ttf" />
+        <None Remove="Resources\BackgroundMenu.png" />
+        <Resource Include="Resources\BackgroundMenu.png" />
+        <None Remove="Resources\Bar.png" />
+        <Resource Include="Resources\Bar.png" />
+        <None Remove="Resources\RoomButton\LobbyBar.png" />
+        <Resource Include="Resources\RoomButton\LobbyBar.png" />
+        <None Remove="Resources\RoomButton\LobbyBarDown.png" />
+        <Resource Include="Resources\RoomButton\LobbyBarDown.png" />
+        <None Remove="Resources\RoomButton\LobbyBarHover.png" />
+        <Resource Include="Resources\RoomButton\LobbyBarHover.png" />
+        <None Remove="Resources\Wifi\Wifi.png" />
+        <Resource Include="Resources\Wifi\Wifi.png" />
+        <None Remove="Resources\Wifi\WifiDown.png" />
+        <Resource Include="Resources\Wifi\WifiDown.png" />
+        <None Remove="Resources\Wifi\WifiHover.png" />
+        <Resource Include="Resources\Wifi\WifiHover.png" />
+        <None Remove="Resources\A\Down.png" />
+        <Resource Include="Resources\A\Down.png" />
+        <None Remove="Resources\A\Hover.png" />
+        <Resource Include="Resources\A\Hover.png" />
+        <None Remove="Resources\A\Plain.png" />
+        <Resource Include="Resources\A\Plain.png" />
+        <None Remove="Resources\D\Hover.png" />
+        <Resource Include="Resources\D\Hover.png" />
+        <None Remove="Resources\C\Down.png" />
+        <Resource Include="Resources\C\Down.png" />
+        <None Remove="Resources\B\Down.png" />
+        <Resource Include="Resources\B\Down.png" />
+        <None Remove="Resources\B\Plain.png" />
+        <Resource Include="Resources\B\Plain.png" />
+        <None Remove="Resources\B\Hover.png" />
+        <Resource Include="Resources\B\Hover.png" />
+        <None Remove="Resources\D\Down.png" />
+        <Resource Include="Resources\D\Down.png" />
+        <None Remove="Resources\C\Plain.png" />
+        <Resource Include="Resources\C\Plain.png" />
+        <None Remove="Resources\D\Plain.png" />
+        <Resource Include="Resources\D\Plain.png" />
+        <None Remove="Resources\C\Hover.png" />
+        <Resource Include="Resources\C\Hover.png" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Resources\B" />
+      <Folder Include="Resources\C" />
+      <Folder Include="Resources\D" />
+    </ItemGroup>
+
+</Project>
