@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Pictochat.Controls.LobbyButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ctrls="clr-namespace:Pictochat.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="346" d:DesignWidth="460" FontFamily="Nintendo DS BIOS">
+    <Grid>
+            
+        <Image x:Name="LobbyBar" Source="/Pictochat;component/Resources/RoomButton/LobbyBar.png" RenderOptions.BitmapScalingMode="NearestNeighbor" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" PreviewMouseUp="OnPreviewMouseUp" PreviewMouseDown="OnPreviewMouseDown"/>
+            
+        <Image x:Name="RoomIdentifier" Source="/Pictochat;component/Resources/A/Plain.png" Margin="0 8 10 8" IsHitTestVisible="False" HorizontalAlignment="Left" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
+        <TextBlock x:Name="RoomText" Text="Chat Room" IsHitTestVisible="False" VerticalAlignment="Center" Margin="100 0 0 0" FontSize="32" Foreground="{StaticResource TextBrush}"/>
+        <TextBlock x:Name="RoomConnectedText" Text="0" IsHitTestVisible="False" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="160 0 0 0" FontSize="36" Foreground="{StaticResource TextBrush}"/>
+
+        <Image x:Name="LobbyWifi" IsHitTestVisible="False" HorizontalAlignment="Right" Margin="30 30 20 30" Source="/Pictochat;component/Resources/Wifi/Wifi.png" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+    </Grid>
+</UserControl>

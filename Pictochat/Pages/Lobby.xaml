@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Pictochat.Pages.Lobby"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ctrls="clr-namespace:Pictochat.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="576" d:DesignWidth="768" FontFamily="{StaticResource DSFont}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Image Grid.Row="0" Grid.RowSpan="3" Source="/Pictochat;component/Resources/BackgroundMenu.png" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+        <Image Grid.Row="0" Source="/Pictochat;component/Resources/Bar.png" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 5" Text="Choose a Chat Room to join." FontSize="42" Foreground="#202020"></TextBlock>
+        <Image Grid.Row="2" Source="/Pictochat;component/Resources/Bar.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderTransformOrigin="0.5, 0.5">
+            <Image.RenderTransform>
+                <ScaleTransform ScaleY="-1"/>
+            </Image.RenderTransform>
+        </Image>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <ctrls:LobbyButton Grid.Row="0" Grid.Column="1" Room="A"/>
+            <ctrls:LobbyButton Grid.Row="1" Grid.Column="1" Room="B"/>
+            <ctrls:LobbyButton Grid.Row="2" Grid.Column="1" Room="C"/>
+            <ctrls:LobbyButton Grid.Row="3" Grid.Column="1" Room="D"/>
+        </Grid>
+    </Grid>
+    
+    
+</UserControl>
