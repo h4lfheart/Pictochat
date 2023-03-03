@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using Pictochat.Extensions;
 using Pictochat.Models;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using Color = System.Windows.Media.Color;
 
 namespace Pictochat.Controls;
@@ -22,6 +25,17 @@ public partial class MessageBox
                 Message.Text = args.Data.ToString();
                 break;
             
+            case ECommandType.MessageImage:
+                Name.Text = args.Name;
+
+                var imageData = (Image<Rgba32>) args.Data!;
+                var source = imageData.ToBitmapImage();
+                
+                PreviewImage.Source = source;
+                PreviewImage.Width = imageData.Width*2;
+                PreviewImage.Height = imageData.Height*2;
+                break;
+
             case ECommandType.EventJoin:
                 Name.Foreground = new SolidColorBrush(Colors.DodgerBlue);
                 Name.Text = $"{args.Name} has joined the chatroom.";
@@ -41,7 +55,7 @@ public partial class MessageBox
     {
         Name.Text = header;
         Message.Text = text;
-        Name.Foreground = new SolidColorBrush(Colors.SpringGreen);
+        Name.Foreground = new SolidColorBrush(Colors.LimeGreen);
     }
     
     public static Color ColorFromHSV(double hue, double saturation, double value)

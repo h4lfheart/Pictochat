@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Windows.Controls;
 using Ionic.Zlib;
 using Pictochat.IO;
 using Pictochat.Services;
+using SixLabors.ImageSharp.PixelFormats;
+using Image = SixLabors.ImageSharp.Image;
 
 namespace Pictochat.Models;
 
@@ -66,6 +69,19 @@ public class PictochatUser
                 Ar.WriteFString((string?) data ?? string.Empty);
                 break;
             }
+            case ECommandType.MessageImage:
+            {
+                if (data is not Image imageRef) break;
+
+                var image = imageRef.CloneAs<Rgba32>();
+                var imageBytes = new byte[image.Width * image.Height * 4]; // 4 bytes per pixel
+                image.CopyPixelDataTo(imageBytes);
+
+                Ar.Write(image.Width);
+                Ar.Write(image.Height);
+                Ar.WriteArray(imageBytes);
+                break;
+            }
         }
         
         var compressed = GZipStream.CompressBuffer(Ar.GetBuffer());
@@ -82,14 +98,22 @@ public class PictochatUser
         var command = (ECommandType) Ar.ReadByte();
         var ip = new IPAddress(Ar.ReadArray<byte>());
         var name = Ar.ReadFString();
-
-
+        
         var receiveData = new PictochatReceiveData(command, ip, name);
         switch (command)
         {
             case ECommandType.MessageText:
             {
                 receiveData.Data = Ar.ReadFString();
+                break;
+            }
+            case ECommandType.MessageImage:
+            {
+                var width = Ar.Read<int>();
+                var height = Ar.Read<int>();
+                var pixels = Ar.ReadArray<byte>();
+
+                receiveData.Data = Image.LoadPixelData<Rgba32>(pixels, width, height);
                 break;
             }
         }

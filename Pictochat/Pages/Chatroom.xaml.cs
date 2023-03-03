@@ -8,6 +8,8 @@ using Pictochat.Extensions;
 using Pictochat.Models;
 using Pictochat.Services;
 using Pictochat.Views;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using MessageBox = Pictochat.Controls.MessageBox;
 
 namespace Pictochat.Pages;
@@ -94,6 +96,34 @@ public partial class Chatroom
             default:
                 InputText.Text += Keyboard.GetCharFromKey(e.Key).ToString() ?? string.Empty;
                 break;
+        }
+    }
+
+    private void OnDragEnter(object sender, DragEventArgs e)
+    {
+        DragDropBox.Visibility = Visibility.Visible;
+    }
+
+    private void OnDragLeave(object sender, DragEventArgs e)
+    {
+        DragDropBox.Visibility = Visibility.Collapsed;
+    }
+
+    private void OnDrop(object sender, DragEventArgs e)
+    {
+        DragDropBox.Visibility = Visibility.Collapsed;
+        
+        if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+        if (e.Data.GetData(DataFormats.FileDrop) is not string[] fileNames) return;
+
+        foreach (var file in fileNames)
+        {
+            var image = Image.Load(file);
+            var widthRatio = image.Width / image.Height;
+            var heightRatio = image.Height / image.Width;
+            image.Mutate(x => x.Resize(widthRatio * Math.Min(image.Width, 128), heightRatio * Math.Min(image.Height, 128)));
+            
+            User.Send(ECommandType.MessageImage, image);
         }
     }
 }
