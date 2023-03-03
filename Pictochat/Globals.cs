@@ -7,3 +7,5 @@ public static class Globals
     public const int PORT_C = 24282;
     public const int PORT_D = 24283;
 }
+
+public delegate void EventHandler<in TSender, in TArgs>(TSender sender, TArgs args);

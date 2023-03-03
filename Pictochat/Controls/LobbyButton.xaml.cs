@@ -2,7 +2,11 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using Pictochat.Models;
+using Pictochat.Pages;
+using Pictochat.Services;
 
 namespace Pictochat.Controls;
 
@@ -15,6 +19,10 @@ public partial class LobbyButton
         get => (string)GetValue(RoomProperty);
         set => SetValue(RoomProperty, value);
     }
+
+    private PictochatUser User;
+    private ERoom RoomType;
+    private bool IsFadingOut;
     
     private BitmapSource RoomIdentifierPlain;
     private BitmapSource RoomIdentifierDown;
@@ -39,6 +47,17 @@ public partial class LobbyButton
         Loaded += (sender, args) =>
         {
             RoomText.Text = $"Chat Room {Room}";
+            RoomType = Enum.Parse<ERoom>(Room);
+            User = PictochatService.Get(RoomType);
+            User.Received += (user, data) =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (data.Command is ECommandType.EventJoin) RoomConnectedText.Text = User.Peers.Count.ToString();
+                });
+            };
+            
+            RoomConnectedText.Text = User.Peers.Count.ToString();
             
             RoomIdentifierPlain = new BitmapImage(new Uri($"pack://application:,,,/Resources/{Room}/Plain.png"));
             RoomIdentifierDown = new BitmapImage(new Uri($"pack://application:,,,/Resources/{Room}/Down.png"));
@@ -86,5 +105,16 @@ public partial class LobbyButton
         RoomText.Foreground = PlainColor;
         RoomConnectedText.Foreground = PlainColor;
         RoomIdentifier.Source = RoomIdentifierPlain;
+        
+        if (IsFadingOut) return;
+        IsFadingOut = true;
+        
+        var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.5));
+        fadeOut.Completed += (o, args) =>
+        {
+            AppService.MainVM.ActivePage = new Chatroom(RoomType);
+        };
+        
+        AppService.MainVM.ActivePage.BeginAnimation(OpacityProperty, fadeOut);
     }
 }

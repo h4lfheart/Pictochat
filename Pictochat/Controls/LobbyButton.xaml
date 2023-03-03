@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ctrls="clr-namespace:Pictochat.Controls"
              mc:Ignorable="d"
-             d:DesignHeight="346" d:DesignWidth="460" FontFamily="Nintendo DS BIOS">
+             d:DesignHeight="346" d:DesignWidth="460" FontFamily="{StaticResource DSFont}">
     <Grid>
             
         <Image x:Name="LobbyBar" Source="/Pictochat;component/Resources/RoomButton/LobbyBar.png" RenderOptions.BitmapScalingMode="NearestNeighbor" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" PreviewMouseUp="OnPreviewMouseUp" PreviewMouseDown="OnPreviewMouseDown"/>

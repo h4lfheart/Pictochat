@@ -10,6 +10,8 @@
 
     <ItemGroup>
       <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+      <PackageReference Include="GenericReader" Version="1.0.3" />
+      <PackageReference Include="Ionic.Zip-1.9.1.8" Version="1.9.1.8" />
     </ItemGroup>
     
     <ItemGroup>
@@ -56,6 +58,18 @@
         <Resource Include="Resources\D\Plain.png" />
         <None Remove="Resources\C\Hover.png" />
         <Resource Include="Resources\C\Hover.png" />
+        <None Remove="Resources\RoomSideBar.png" />
+        <Resource Include="Resources\RoomSideBar.png" />
+        <None Remove="Resources\TextBox.png" />
+        <Resource Include="Resources\TextBox.png" />
+        <None Remove="Resources\A\Room.png" />
+        <Resource Include="Resources\A\Room.png" />
+        <None Remove="Resources\B\Room.png" />
+        <Resource Include="Resources\B\Room.png" />
+        <None Remove="Resources\C\Room.png" />
+        <Resource Include="Resources\C\Room.png" />
+        <None Remove="Resources\D\Room.png" />
+        <Resource Include="Resources\D\Room.png" />
     </ItemGroup>
     
     <ItemGroup>

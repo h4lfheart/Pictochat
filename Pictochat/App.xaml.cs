@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Threading;
+using Pictochat.Services;
 
 namespace Pictochat;
 
@@ -22,5 +23,11 @@ public partial class App
     {
         Console.WriteLine(e.Exception.Message + e.Exception.StackTrace);
         e.Handled = true;
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        base.OnExit(e);
+        PictochatService.Leave();
     }
 }
