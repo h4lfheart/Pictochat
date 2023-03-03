@@ -2,8 +2,9 @@
 .idea
 .git
 
-#Rider
+# Rider
 bin
 obj
 
+# Build
 Release
