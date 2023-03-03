@@ -2,9 +2,9 @@
 A DSi Pictochat-Styled Chatroom created with C# and WPF.
 
 <p>
-    <img src="https://github.com/halfuwu/Pictochat/blob/master/.github/HealthAndSafety.png?raw=true" alt="PictochatLobby" width="312">
-    <img src="https://github.com/halfuwu/Pictochat/blob/master/.github/Lobby.png?raw=true" alt="PictochatLobby" width="312">
-    <img src="https://github.com/halfuwu/Pictochat/blob/master/.github/Chatroom.png?raw=true" alt="PictochatLobby" width="312">
+    <img src="https://github.com/halfuwu/Pictochat/blob/master/.github/HealthAndSafety.png?raw=true" alt="PictochatLobby" width="216">
+    <img src="https://github.com/halfuwu/Pictochat/blob/master/.github/Lobby.png?raw=true" alt="PictochatLobby" width="216">
+    <img src="https://github.com/halfuwu/Pictochat/blob/master/.github/Chatroom.png?raw=true" alt="PictochatLobby" width="216">
 </p>
 
 ## How It Works
