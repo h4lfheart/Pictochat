@@ -22,13 +22,13 @@ public partial class MessageBox
         {
             case ECommandType.MessageText:
                 Name.Text = args.Name;
-                Message.Text = args.Data.ToString();
+                Message.Text = args.GetData<string>();
                 break;
             
             case ECommandType.MessageImage:
                 Name.Text = args.Name;
 
-                var imageData = (Image<Rgba32>) args.Data!;
+                var imageData = args.GetData<Image<Rgba32>>();
                 var source = imageData.ToBitmapImage();
                 
                 PreviewImage.Source = source;
@@ -48,7 +48,6 @@ public partial class MessageBox
                 Message.Visibility = Visibility.Collapsed;
                 break;
         }
-        
     }
     
     public MessageBox(string header, string text) : this()
