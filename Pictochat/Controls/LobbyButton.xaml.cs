@@ -49,13 +49,7 @@ public partial class LobbyButton
             RoomText.Text = $"Chat Room {Room}";
             RoomType = Enum.Parse<ERoom>(Room);
             User = PictochatService.Get(RoomType);
-            User.Received += (user, data) =>
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    if (data.Command is ECommandType.EventJoin) RoomConnectedText.Text = User.Peers.Count.ToString();
-                });
-            };
+            User.Received += UserOnReceived;
             
             RoomConnectedText.Text = User.Peers.Count.ToString();
             
@@ -66,6 +60,15 @@ public partial class LobbyButton
             RoomIdentifier.Source = RoomIdentifierPlain;
         };
     }
+
+    private void UserOnReceived(PictochatUser sender, PictochatReceiveData args)
+    {
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            if (args.Command is ECommandType.EventJoin or ECommandType.EventLeave) RoomConnectedText.Text = User.Peers.Count.ToString();
+        });
+    }
+
 
     // HOVER
     private void OnMouseEnter(object sender, MouseEventArgs e)
@@ -112,6 +115,7 @@ public partial class LobbyButton
         var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.5));
         fadeOut.Completed += (o, args) =>
         {
+            User.Received -= UserOnReceived;
             AppService.MainVM.ActivePage = new Chatroom(RoomType);
         };
         

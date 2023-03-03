@@ -27,7 +27,8 @@
                 </Grid.RowDefinitions>
             
                 <Image Grid.Row="0" Grid.RowSpan="3" Source="/Pictochat;component/Resources/RoomSideBar.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
-                <Image Grid.Row="0" Margin="2" Source="/Pictochat;component/Resources/Wifi/Wifi.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                
+                <Image Grid.Row="0" Margin="2 2 2 2" Source="/Pictochat;component/Resources/XBox.png" VerticalAlignment="Top" Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" MouseDown="OnMouseDown"/>
                 <Image Name="RoomIdentifier" Grid.Row="2" Margin="2" Source="/Pictochat;component/Resources/A/Room.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
             </Grid>
         

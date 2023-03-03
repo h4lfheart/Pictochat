@@ -17,6 +17,7 @@ namespace Pictochat.Pages;
 public partial class Chatroom
 {
     private PictochatUser User;
+    private bool IsFadingOut;
 
     private static readonly ECommandType[] VisibleCommands =
     {
@@ -34,23 +35,25 @@ public partial class Chatroom
         BeginAnimation(OpacityProperty, fadeIn);
 
         User = PictochatService.Get(roomType);
-        User.Received += (sender, args) =>
-        {
-            if (VisibleCommands.Contains(args.Command))
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    Messages.Items.Add(new MessageBox(args));
-                    MessagesScroll.ScrollToBottom();
-                });
-            }
-        };
+        User.Received += UserOnReceived;
         
         User.Join();
         
         RoomIdentifier.Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/{roomType.ToString()}/Room.png"));
         
         MainView.Instance.KeyDown += OnKeyDown;
+    }
+
+    private void UserOnReceived(PictochatUser sender, PictochatReceiveData args)
+    {
+        if (VisibleCommands.Contains(args.Command))
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Messages.Items.Add(new MessageBox(args));
+                MessagesScroll.ScrollToBottom();
+            });
+        }
     }
 
     private void SendMessage()
@@ -67,7 +70,8 @@ public partial class Chatroom
         if (input.StartsWith("/connected", StringComparison.OrdinalIgnoreCase))
         {
             var userString = User.Peers.Count == 1 ? "user" : "users";
-            Messages.Items.Add(new MessageBox($"There are {User.Peers.Count} {userString} connected.", User.Peers.CommaJoin()));
+            var areString = User.Peers.Count == 1 ? "is" : "are";
+            Messages.Items.Add(new MessageBox($"There {areString} {User.Peers.Count} {userString} connected.", User.Peers.CommaJoin()));
             Refresh();
             return;
         }
@@ -125,5 +129,22 @@ public partial class Chatroom
             
             User.Send(ECommandType.MessageImage, image);
         }
+    }
+
+    private void OnMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (IsFadingOut) return;
+        IsFadingOut = true;
+        
+        var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.5));
+        fadeOut.Completed += (o, args) =>
+        {
+            MainView.Instance.KeyDown -= OnKeyDown;
+            User.Received -= UserOnReceived;
+            User.Leave();
+            AppService.MainVM.ActivePage = new Lobby();
+        };
+        
+        AppService.MainVM.ActivePage.BeginAnimation(OpacityProperty, fadeOut);
     }
 }

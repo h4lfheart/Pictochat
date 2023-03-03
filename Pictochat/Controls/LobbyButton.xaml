@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="346" d:DesignWidth="460" FontFamily="{StaticResource DSFont}">
     <Grid>
-            
+        
         <Image x:Name="LobbyBar" Source="/Pictochat;component/Resources/RoomButton/LobbyBar.png" RenderOptions.BitmapScalingMode="NearestNeighbor" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" PreviewMouseUp="OnPreviewMouseUp" PreviewMouseDown="OnPreviewMouseDown"/>
             
         <Image x:Name="RoomIdentifier" Source="/Pictochat;component/Resources/A/Plain.png" Margin="0 8 10 8" IsHitTestVisible="False" HorizontalAlignment="Left" RenderOptions.BitmapScalingMode="NearestNeighbor"></Image>
