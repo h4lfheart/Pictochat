@@ -1,7 +1,11 @@
 # Pictochat
 A DSi Pictochat-Styled Chatroom created with C# and WPF.
 
-<img src="https://github.com/halfuwu/Pictochat/blob/master/.github/Lobby.png?raw=true" alt="PictochatLobby">
+<p>
+    <img src="https://github.com/halfuwu/Pictochat/blob/master/.github/HealthAndSafety.png?raw=true" alt="PictochatLobby" width="312">
+    <img src="https://github.com/halfuwu/Pictochat/blob/master/.github/Lobby.png?raw=true" alt="PictochatLobby" width="312">
+    <img src="https://github.com/halfuwu/Pictochat/blob/master/.github/Chatroom.png?raw=true" alt="PictochatLobby" width="312">
+</p>
 
 ## How It Works
 The communication itself is entirely made up of UDP sockets. It uses a client-to-client structure so that anyone who is on the same network as you can use the chatrooms and each room has a dedicated port where all the relevant info goes through.

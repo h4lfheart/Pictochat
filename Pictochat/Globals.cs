@@ -1,7 +1,11 @@
-﻿namespace Pictochat;
+﻿using System;
+
+namespace Pictochat;
 
 public static class Globals
 {
+    public static readonly string UserName = Environment.UserName;
+    
     public const int PORT_A = 24280;
     public const int PORT_B = 24281;
     public const int PORT_C = 24282;

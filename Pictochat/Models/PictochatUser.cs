@@ -60,7 +60,7 @@ public class PictochatUser
         using var Ar = new BufferWriter();
         Ar.Write((byte) command);
         Ar.WriteArray(GetIP());
-        Ar.WriteFString(Environment.UserName);
+        Ar.WriteFString(Globals.UserName);
 
         switch (command)
         {
