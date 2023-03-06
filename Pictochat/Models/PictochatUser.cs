@@ -65,6 +65,7 @@ public class PictochatUser
         switch (command)
         {
             case ECommandType.MessageText:
+            case ECommandType.EventRename:
             {
                 Ar.WriteFString((string?) data ?? string.Empty);
                 break;
@@ -102,6 +103,7 @@ public class PictochatUser
         var receiveData = new PictochatReceiveData(command, ip, name);
         switch (command)
         {
+            case ECommandType.EventRename:
             case ECommandType.MessageText:
             {
                 receiveData.Data = Ar.ReadFString();

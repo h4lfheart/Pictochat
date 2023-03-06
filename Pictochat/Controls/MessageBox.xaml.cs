@@ -47,14 +47,20 @@ public partial class MessageBox
                 Name.Text = $"{args.Name} has left the chatroom.";
                 Message.Visibility = Visibility.Collapsed;
                 break;
+            
+            case ECommandType.EventRename:
+                Name.Foreground = new SolidColorBrush(Colors.MediumPurple);
+                Name.Text = $"{args.Name} has been renamed to {args.GetData<string>()}";
+                Message.Visibility = Visibility.Collapsed;
+                break;
         }
     }
     
-    public MessageBox(string header, string text) : this()
+    public MessageBox(string header, string text, Color? color = null) : this()
     {
         Name.Text = header;
         Message.Text = text;
-        Name.Foreground = new SolidColorBrush(Colors.LimeGreen);
+        Name.Foreground = new SolidColorBrush(color ?? Colors.LimeGreen);
     }
     
     public static Color ColorFromHSV(double hue, double saturation, double value)

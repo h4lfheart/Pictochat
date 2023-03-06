@@ -24,7 +24,8 @@ public partial class Chatroom
         ECommandType.MessageText,
         ECommandType.MessageImage,
         ECommandType.EventJoin,
-        ECommandType.EventLeave
+        ECommandType.EventLeave,
+        ECommandType.EventRename
     };
     
     public Chatroom(ERoom roomType)
@@ -66,12 +67,21 @@ public partial class Chatroom
             Refresh();
             return;
         }
+
+        if (input.StartsWith("/rename", StringComparison.OrdinalIgnoreCase))
+        {
+            var name = input[8..];
+            User.Send(ECommandType.EventRename, name);
+            Globals.UserName = name;
+            Refresh();
+            return;
+        }
         
         if (input.StartsWith("/connected", StringComparison.OrdinalIgnoreCase))
         {
-            var userString = User.Peers.Count == 1 ? "user" : "users";
-            var areString = User.Peers.Count == 1 ? "is" : "are";
-            Messages.Items.Add(new MessageBox($"There {areString} {User.Peers.Count} {userString} connected.", User.Peers.CommaJoin()));
+            var users = User.Peers.Count == 1 ? "user" : "users";
+            var are = User.Peers.Count == 1 ? "is" : "are";
+            Messages.Items.Add(new MessageBox($"There {are} {User.Peers.Count} {users} connected.", User.Peers.CommaJoin()));
             Refresh();
             return;
         }

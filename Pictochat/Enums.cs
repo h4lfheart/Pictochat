@@ -19,5 +19,7 @@ public enum ECommandType : byte
     EventLeave = 0x05,
     
     MessageText = 0x06,
-    MessageImage = 0x07
+    MessageImage = 0x07,
+    
+    EventRename = 0x08
 }

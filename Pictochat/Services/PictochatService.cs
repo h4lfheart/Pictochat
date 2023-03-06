@@ -49,6 +49,12 @@ public static class PictochatService
                         sender.Peers.Remove(args.Name);
                         break;
                     }
+                    case ECommandType.EventRename:
+                    {
+                        var peerIndex = sender.Peers.IndexOf(args.Name);
+                        sender.Peers[peerIndex] = args.GetData<string>();
+                        break;
+                    }
                 }
             };
             
