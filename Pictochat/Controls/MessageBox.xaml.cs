@@ -50,7 +50,7 @@ public partial class MessageBox
             
             case ECommandType.EventRename:
                 Name.Foreground = new SolidColorBrush(Colors.MediumPurple);
-                Name.Text = $"{args.Name} has been renamed to {args.GetData<string>()}";
+                Name.Text = $"{args.Name} has been renamed to \"{args.GetData<string>()}\"";
                 Message.Visibility = Visibility.Collapsed;
                 break;
         }

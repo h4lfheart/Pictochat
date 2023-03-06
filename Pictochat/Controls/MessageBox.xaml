@@ -9,8 +9,8 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
         
-            <TextBlock Grid.Row="0" Name="Name" Text="Username" Foreground="{StaticResource TextBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="40"></TextBlock>
-            <TextBlock Grid.Row="1" Name="Message" Foreground="{StaticResource TextBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" TextWrapping="Wrap"></TextBlock>
+            <TextBlock Grid.Row="0" Name="Name" Text="Username" Foreground="{StaticResource TextBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" FontSize="40"></TextBlock>
+            <TextBlock Grid.Row="1" Name="Message" Foreground="{StaticResource TextBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="40" TextWrapping="Wrap"></TextBlock>
             <Image Grid.Row="1" Name="PreviewImage" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
         </Grid>
     </Border>
