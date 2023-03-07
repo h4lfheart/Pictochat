@@ -9,6 +9,7 @@
         <KeyBinding Modifiers="Control" Key="V" Command="{Binding PasteCommand}"/>
         <KeyBinding Modifiers="Control" Key="C" Command="{Binding CopyCommand}"/>
     </UserControl.InputBindings>
+    
     <Grid>
          <Grid>
             <Grid.RowDefinitions>
@@ -33,17 +34,17 @@
                 <Image Grid.Row="0" Grid.RowSpan="3" Source="/Pictochat;component/Resources/RoomSideBar.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
                 
                 <Image Grid.Row="0" Margin="2 2 2 2" Source="/Pictochat;component/Resources/XBox.png" VerticalAlignment="Top" Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" MouseDown="OnMouseDown"/>
-                <Image Name="RoomIdentifier" Grid.Row="2" Margin="2" Source="/Pictochat;component/Resources/A/Room.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                <Image Grid.Row="2" Margin="2" Source="{Binding RoomIdentifier}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
             </Grid>
         
             <ScrollViewer Name="MessagesScroll" Grid.Column="1" Grid.Row="0" CanContentScroll="True" VerticalScrollBarVisibility="Hidden">
-                <ItemsControl Margin="5" Name="Messages" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Transparent">
+                <ItemsControl Margin="5" ItemsSource="{Binding Messages}" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Transparent">
             
                 </ItemsControl>
             </ScrollViewer>
         
             <Image Grid.Column="1" Grid.Row="1" Source="/Pictochat;component/Resources/TextBox.png" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
-            <TextBlock Grid.Column="1" Name="InputText" Grid.Row="1" Margin="20" FontSize="40" Foreground="{StaticResource TextBrush}" TextWrapping="Wrap"/>
+            <TextBlock Grid.Column="1" Text="{Binding InputText}" Grid.Row="1" Margin="20" FontSize="40" Foreground="{StaticResource TextBrush}" TextWrapping="Wrap"/>
 
         </Grid>
         <GroupBox Name="DragDropBox" Background="{StaticResource TextBrush}" Opacity="0.75" Visibility="Collapsed">
