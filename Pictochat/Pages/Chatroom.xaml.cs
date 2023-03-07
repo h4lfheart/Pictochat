@@ -6,6 +6,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Pictochat.Extensions;
 using Pictochat.Models;
+using Pictochat.PageModels;
 using Pictochat.Services;
 using Pictochat.Views;
 using SixLabors.ImageSharp;
@@ -16,6 +17,7 @@ namespace Pictochat.Pages;
 
 public partial class Chatroom
 {
+    public static Chatroom Instance;
     private PictochatUser User;
     private bool IsFadingOut;
 
@@ -31,6 +33,8 @@ public partial class Chatroom
     public Chatroom(ERoom roomType)
     {
         InitializeComponent();
+        Instance = this;
+        DataContext = new ChatroomPageModel();
 
         var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.5));
         BeginAnimation(OpacityProperty, fadeIn);

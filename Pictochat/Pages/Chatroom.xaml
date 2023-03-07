@@ -5,6 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              d:DesignHeight="576" d:DesignWidth="768" FontFamily="{StaticResource DSFont}" DragEnter="OnDragEnter" DragLeave="OnDragLeave" Drop="OnDrop" AllowDrop="True">
+    <UserControl.InputBindings>
+        <KeyBinding Modifiers="Control" Key="V" Command="{Binding PasteCommand}"/>
+        <KeyBinding Modifiers="Control" Key="C" Command="{Binding CopyCommand}"/>
+    </UserControl.InputBindings>
     <Grid>
          <Grid>
             <Grid.RowDefinitions>
