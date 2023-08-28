@@ -6,7 +6,6 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Pictochat.Extensions;
 using Pictochat.Models;
-using Pictochat.PageModels;
 using Pictochat.Services;
 using Pictochat.Views;
 using SixLabors.ImageSharp;
@@ -17,7 +16,6 @@ namespace Pictochat.Pages;
 
 public partial class Chatroom
 {
-    private ChatroomPageModel Context;
     private PictochatUser User;
     private bool IsFadingOut;
 
@@ -33,18 +31,17 @@ public partial class Chatroom
     public Chatroom(ERoom roomType)
     {
         InitializeComponent();
-        Context = new ChatroomPageModel();
-        DataContext = Context;
-
-        var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.5));
-        BeginAnimation(OpacityProperty, fadeIn);
-
         User = PictochatService.Get(roomType);
         User.Received += UserOnReceived;
         
         User.Join();
         
-        Context.RoomIdentifier = new BitmapImage(new Uri($"pack://application:,,,/Resources/{roomType.ToString()}/Room.png"));
+        DataContext = User.Chatroom;
+
+        var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.5));
+        BeginAnimation(OpacityProperty, fadeIn);
+
+        User.Chatroom.RoomIdentifier = new BitmapImage(new Uri($"pack://application:,,,/Resources/{roomType.ToString()}/Room.png"));
         
         MainView.Instance.KeyDown += OnKeyDown;
     }
@@ -55,7 +52,7 @@ public partial class Chatroom
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Context.Messages.Add(new MessageBox(args));
+                User.Chatroom.Messages.Add(new MessageBox(args));
                 MessagesScroll.ScrollToBottom();
             });
         }
@@ -63,11 +60,11 @@ public partial class Chatroom
 
     private void SendMessage()
     {
-        var input = Context.InputText;
+        var input = User.Chatroom.InputText;
         
         if (input.StartsWith("/clear", StringComparison.OrdinalIgnoreCase))
         {
-            Context.Messages.Clear();
+            User.Chatroom.Messages.Clear();
             Refresh();
             return;
         }
@@ -85,7 +82,7 @@ public partial class Chatroom
         {
             var users = User.Peers.Count == 1 ? "user" : "users";
             var are = User.Peers.Count == 1 ? "is" : "are";
-            Context.Messages.Add(new MessageBox($"There {are} {User.Peers.Count} {users} connected.", User.Peers.CommaJoin()));
+            User.Chatroom.Messages.Add(new MessageBox($"There {are} {User.Peers.Count} {users} connected.", User.Peers.CommaJoin()));
             Refresh();
             return;
         }
@@ -96,7 +93,7 @@ public partial class Chatroom
 
     private void Refresh()
     {
-        Context.InputText = string.Empty;
+        User.Chatroom.InputText = string.Empty;
         MessagesScroll.ScrollToBottom();
     }
     
@@ -108,11 +105,11 @@ public partial class Chatroom
                 SendMessage();
                 return;
             case Key.Back:
-                if (Context.InputText.Length == 0) break;
-                Context.InputText = Context.InputText[..^1];
+                if (User.Chatroom.InputText.Length == 0) break;
+                User.Chatroom.InputText = User.Chatroom.InputText[..^1];
                 return;
             default:
-                Context.InputText += Keyboard.GetCharFromKey(e.Key).ToString() ?? string.Empty;
+                User.Chatroom.InputText += Keyboard.GetCharFromKey(e.Key).ToString() ?? string.Empty;
                 break;
         }
     }

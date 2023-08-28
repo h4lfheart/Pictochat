@@ -16,6 +16,7 @@ public class PictochatUser
     public int Port;
     public bool InRoom;
     public List<string> Peers = new();
+    public ChatroomContext Chatroom = new();
     public event EventHandler<PictochatUser, PictochatReceiveData> Received;
 
     private UdpClient Broadcaster = new();

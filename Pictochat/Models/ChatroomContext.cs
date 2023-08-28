@@ -5,9 +5,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MessageBox = Pictochat.Controls.MessageBox;
 
-namespace Pictochat.PageModels;
+namespace Pictochat.Models;
 
-public partial class ChatroomPageModel : ObservableObject
+public partial class ChatroomContext : ObservableObject
 {
     [ObservableProperty] private string inputText;
     [ObservableProperty] private BitmapImage roomIdentifier;
